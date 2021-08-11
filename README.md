@@ -1,24 +1,35 @@
 # vue_ros
 
-## Project setup
+## 介绍
+
+> 基于Roslibjs和Websocket实现了Vue.js框架与ROS话题服务通信
+
+## 演示
+
+### 动画
+
+![](screenshots/动画.gif)
+
+### 首页
+
+![](screenshots/首页.png)
+
+### 面板
+
+![](screenshots/面板.png)
+
+## 使用
+
+### 安装依赖
+
 ```
-npm install
+yarn install
 ```
 
-### Compiles and hot-reloads for development
+### 启动项目
+
 ```
-npm run serve
+yarn serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
