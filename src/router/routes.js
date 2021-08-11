@@ -8,7 +8,7 @@ export default [
     name: 'index',
     component: Index,
     meta: {
-      title: '主页'
+      title: '主页',
     }
   },
   // 面板页面
@@ -17,7 +17,8 @@ export default [
     name: 'panel',
     component: Panel,
     meta: {
-      title: '面板'
+      title: '面板',
+      requireConnected: true
     }
   }
 ]

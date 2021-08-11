@@ -21,7 +21,8 @@
           <sui-form-field inline>
             <sui-checkbox label="记住地址" v-model="isSave" @click="handleSaveAddress"/>
           </sui-form-field>
-          <sui-button fluid secondary content="连接ROS服务" @click="connRosWS"/>
+          <sui-button fluid secondary content="连接ROS服务" v-if="!isConnected" @click="connRosWS"/>
+          <sui-button fluid secondary content="断开连接" v-else @click="CLOSE_ROS_CONNECTION"/>
         </sui-form>
       </div>
     </sui-container>
@@ -34,7 +35,6 @@ import {mapState, mapMutations} from 'vuex'
 import _ from 'lodash'
 import settings from '@/settings'
 import {isEmptyStr, localRead, localRemove, localSave} from "@/lib/tools"
-import {CREATE_ROS_INSTANCE} from "@/store/mutationsType"
 
 export default {
   name: "Index",
@@ -61,7 +61,7 @@ export default {
     ...mapState(['rosInstance', 'isConnected'])
   },
   methods: {
-    ...mapMutations([CREATE_ROS_INSTANCE]),
+    ...mapMutations(['CREATE_ROS_INSTANCE', 'CLOSE_ROS_CONNECTION']),
     // 记住地址
     handleSaveAddress() {
       setTimeout(() => {
@@ -119,10 +119,7 @@ export default {
             }
           })
 
-    }, 1000)
-  },
-  created() {
-
+    }, 400)
   }
 }
 </script>

@@ -9,6 +9,8 @@ export default {
   },
   // 关闭ROS连接
   [types.CLOSE_ROS_CONNECTION](state) {
+    console.log('ggggg')
+    console.log(state)
     state.rosInstance = null
     state.isConnected = false
   }

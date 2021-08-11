@@ -41,8 +41,11 @@
               <el-table-column type="selection"/>
               <el-table-column label="话题名称" align="center" prop="topicName"/>
               <el-table-column label="消息类型" align="center" prop="messageType"/>
-              <el-table-column label="消息内容" align="center" prop="messageData"/>
-              <el-table-column label="消息内容" align="center">
+              <el-table-column label="时长" align="center">
+                <template slot-scope="scope">{{ scope.row.timeStamp | formatDateTimeFromNow }}</template>
+              </el-table-column>
+              <el-table-column label="备注" align="center" prop="desc"/>
+              <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
                   <sui-button secondary size="small" content="删除" @click="handleDeleteItem(scope.$index)"/>
                 </template>
@@ -57,8 +60,9 @@
 
 <script>
 import _ from 'lodash'
+import moment from 'moment'
 import {rosPublish} from "@/lib/utils"
-import {localRead, localSave} from "@/lib/tools"
+import {isEmptyStr, localRead, localSave} from "@/lib/tools"
 
 export default {
   name: "Panel",
@@ -84,6 +88,15 @@ export default {
       deep: true
     }
   },
+  filters: {
+    formatDateTimeFromNow(val) {
+      if (isEmptyStr(val)) {
+        return ''
+      }
+
+      return moment(val).fromNow()
+    }
+  },
   methods: {
     // 改变表格选中项
     handleSelectionChange(itemList) {
@@ -98,6 +111,7 @@ export default {
       })
           .then(() => {
             this.publishDataList = []
+            this.$toast('删除成功')
           })
     },
     // 删除选中项
@@ -119,6 +133,7 @@ export default {
                 this.publishDataList.splice(i, 1);
               }
             }
+            this.$toast('删除成功')
           })
 
     },
@@ -166,6 +181,9 @@ export default {
             }
           })
     }, 500)
+  },
+  created() {
+    moment.locale()
   }
 }
 </script>
